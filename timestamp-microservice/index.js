@@ -1,15 +1,14 @@
-// index.js
 const express = require('express');
 const cors = require('cors');
 const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static('public')); // serves index.html
 
-// Root route
+// Route: Root
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Route: No date provided
@@ -23,10 +22,12 @@ app.get('/api', (req, res) => {
 
 // Route: Date provided
 app.get('/api/:date', (req, res) => {
-  const { date } = req.params;
+  const dateParam = req.params.date;
 
-  // If date is a number (unix timestamp)
-  let parsedDate = /^\d+$/.test(date) ? new Date(parseInt(date)) : new Date(date);
+  // Check if input is a UNIX timestamp (digits only)
+  const parsedDate = /^\d+$/.test(dateParam)
+    ? new Date(parseInt(dateParam))
+    : new Date(dateParam);
 
   // Validate
   if (parsedDate.toString() === 'Invalid Date') {
@@ -39,8 +40,6 @@ app.get('/api/:date', (req, res) => {
   });
 });
 
-// Listener
+// Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Your app is running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
