@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Timestamp Microservice</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Timestamp Microservice</h1>
+    <form id="timestamp-form">
+      <input type="text" id="dateInput" placeholder="Enter a date or Unix timestamp..." />
+      <button type="submit">Get Timestamp</button>
+    </form>
+    <div id="result">
+      <p><strong>Unix:</strong> <span id="unix"></span></p>
+      <p><strong>UTC:</strong> <span id="utc"></span></p>
+      <p class="error" id="error"></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
